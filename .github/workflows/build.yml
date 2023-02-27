@@ -1,18 +1,26 @@
 
-name: build 
+name: C/C++ CI 
 
 on: [push]
 
 jobs:
-  build-ubuntu:
+  build-logging-interface:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: build and run
-      run: |
-        sudo apt install -y liblapack-dev
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release
-        make -j
-        ctest
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:    
+        submodules: recursive
+
+    - name: Install dependencies
+      run: sudo apt install -y meson
+    
+    - name: logging-interface build
+      run: meson build logging-interface
+    
+    - name: Compile projects
+      run: ninja -C build
+
+    - name: Run tests
+      run: ninja -C build test
+
