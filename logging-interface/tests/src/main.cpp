@@ -8,3 +8,11 @@
  * @copyright Copyright (c) 2023
  * 
  */
+
+#include <iostream>
+
+int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
+{
+    std::cout << "Tests main!" << std::endl;
+    return 0;
+}

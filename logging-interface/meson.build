@@ -4,7 +4,10 @@ project(
   'logging_interface',
   'cpp',
   version : '1.0.0',
-  default_options : ['warning_level=3']
+  default_options : [
+    'warning_level=3', 
+    'cpp_std=c++17'
+  ]
 )
 
 project_description = 'This project is a wrapper arround different logging libraries'
@@ -23,8 +26,9 @@ test_sources = [
 build_args = [
 ]
 
-
-# ===================================================================
+# Dependencies
+fmt_proj = subproject('fmt')
+fmt_dep = fmt_proj.get_variable('fmt_dep')
 
 # ======
 # Target
@@ -51,22 +55,24 @@ project_target = shared_library(
   c_args : build_args,
   gnu_symbol_visibility : 'hidden',
   include_directories : public_headers,
+  dependencies: [
+    fmt_dep
+  ]
 )
-
 
 # =======
 # Project
 # =======
 
 # Make this library usable as a Meson subproject.
-project_dependencies = declare_dependency(
+project_dep = declare_dependency(
   include_directories: public_headers,
   link_with : project_target
 )
-set_variable(meson.project_name() + '_dependencies', project_dependencies)
 
-# Make this library usable from the system's
-# package manager.
+set_variable(meson.project_name() + '_dep', project_dep)
+
+# Make this library usable from the system's package manager.
 install_headers(project_headers, subdir : meson.project_name())
 
 pkg_mod = import('pkgconfig')
@@ -84,14 +90,19 @@ pkg_mod.generate(
 # ==========
 
 if not meson.is_subproject()
-  add_languages('cpp')
+  
+  add_languages('cpp') 
   subdir('tests')
 
-  test('all_tests',
+  test(
+    'tests',
     executable(
       'run_tests',
       files(test_sources),
-      dependencies : [project_dependencies, test_depdepencies],
+      dependencies : [
+        project_dep, 
+        test_dep
+      ],
       install : false
     )
   )
