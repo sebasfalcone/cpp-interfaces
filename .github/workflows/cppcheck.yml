@@ -1,0 +1,21 @@
+
+name: Cppcheck
+
+on: [push]
+
+jobs:
+  build-logging-interface:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:    
+        submodules: recursive
+
+    - name: Install dependencies
+      run: sudo apt install -y cppcheck
+    
+    - name: Run cppcheck
+      run: cppcheck --enable=all -i subprojects -i build -i ninja --suppress=missingIncludeSystem .
+
