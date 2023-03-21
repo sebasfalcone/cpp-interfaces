@@ -1,3 +1,12 @@
+---
+name: Development issue.
+about: A set of tasks based on a proposal or a design.
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 ## Description
 
 <!--
