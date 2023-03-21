@@ -1,0 +1,28 @@
+
+name: Clang-format
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - uses: DoozyX/clang-format-lint-action@v0.14
+      with:
+        source: 'logging-interface/src logging-interface/tests logging-interface/include'
+        extensions: 'h,c,hpp,cpp'
+        clangFormatVersion: 14
+        inplace: True
+
+    - uses: EndBug/add-and-commit@v9
+      with:
+        # https://google.github.io/styleguide/cppguide.html
+        style: Google
+        author_name: sebasfalcone
+        author_email: sebastianfalcone01@gmail.com
+        message: "CL:\n- Clang-format changes"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
