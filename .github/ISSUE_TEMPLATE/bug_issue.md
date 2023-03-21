@@ -1,3 +1,11 @@
+---
+name: Bug issue.
+about: Something isn't working and should be fixed.
+title: ''
+labels: 'bug'
+assignees: ''
+
+---
 ## Description
 
 <!--
@@ -13,7 +21,7 @@
 ## Current behavior
 
 <!--
-    Briefly describe what is in fact happening. You can add evidence, logs, images, etc.
+    Briefly describe what is happening. You can add evidence, logs, images, etc.
 -->
 
 ## Expected behavior
@@ -25,7 +33,7 @@
 ## DoD
 
 <!--
-    A list of well defined items with the requirements to be completed. Add/remove elements according to this particular issue.
+    A list of well-defined items with the requirements to be completed. Add/remove elements according to this particular issue.
 -->
 
 - [ ] The issue has been fixed
