@@ -1,7 +1,7 @@
 /**
  * @file test.hpp
  * @author Sebastian Falcone (sebastianfalcone01@gmail.com)
- * @brief 
+ * @brief
  * @version 1.0
  * @date 2023-02-26
  *
